@@ -129,6 +129,7 @@ public class LinkedListTest {
         // TC1
         list.insertAfter(null, node10);
         Assertions.assertSame(list.head, node10);
+        Assertions.assertSame(list.tail, node3);
         Assertions.assertSame(4, list.count());
 
         Assertions.assertSame(true, list.remove(10));
@@ -139,6 +140,7 @@ public class LinkedListTest {
         // TC2
         list.insertAfter(node1, node10);
         Assertions.assertSame(list.head, node1);
+        Assertions.assertSame(list.tail, node3);
         Assertions.assertSame(4, list.count());
         Assertions.assertSame(node10, list.find(10));
 
@@ -146,6 +148,32 @@ public class LinkedListTest {
         Assertions.assertSame(list.count(), 3);
         Assertions.assertSame(node1, list.head);
         Assertions.assertSame(node3, list.tail);
+    }
+
+    @Test
+    public void testInsertAfterLast() {
+        LinkedList list = new LinkedList();
+        Node node1 = new Node(1);
+        list.addInTail(node1);
+
+
+        Node node2 = new Node(10);
+        list.insertAfter(node1, node2);
+
+        Assertions.assertSame(list.head, node1);
+        Assertions.assertSame(list.tail, node2);
+    }
+
+    @Test
+    public void testInsertAfterSingle() {
+        LinkedList list = new LinkedList();
+        Node node1 = new Node(1);
+
+        list.insertAfter(null,node1);
+
+        Assertions.assertSame(list.head, node1);
+        Assertions.assertSame(list.tail, node1);
+        Assertions.assertSame(1, list.count());
     }
 
     @Test

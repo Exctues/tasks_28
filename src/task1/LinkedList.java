@@ -87,13 +87,17 @@ public class LinkedList {
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         if (_nodeAfter == null) {
             if (head == null) {
+                assert tail == null;
                 tail = _nodeToInsert;
             }
             _nodeToInsert.next = head;
             head = _nodeToInsert;
-        } else {
+        }
+        else {
             _nodeToInsert.next = _nodeAfter.next;
             _nodeAfter.next = _nodeToInsert;
+            if (_nodeAfter == tail)
+                tail = _nodeToInsert;
         }
     }
 
