@@ -101,6 +101,8 @@ public class LinkedList {
         if (_nodeToRemove == head) {
             assert (_previousNode == null);
             head = _nodeToRemove.next;
+            if (head == null)
+                tail = null;
         } else if (_nodeToRemove == tail) {
             assert (tail.next == null);
             tail = _previousNode;
@@ -111,6 +113,22 @@ public class LinkedList {
         }
     }
 
+
+    public static LinkedList sumCorrespondingElementsOfList(LinkedList _a, LinkedList _b) {
+        if (_a.count() != _b.count())
+            return null;
+
+        LinkedList list = new LinkedList();
+        Node aNode = _a.head;
+        Node bNode = _b.head;
+        while (aNode != null && bNode != null) {
+            list.addInTail(new Node(aNode.value + bNode.value));
+            aNode = aNode.next;
+            bNode = bNode.next;
+        }
+
+        return list;
+    }
 }
 
 class Node {
