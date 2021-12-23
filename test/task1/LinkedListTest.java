@@ -165,6 +165,23 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testInsertBeforeLast() {
+        LinkedList list = new LinkedList();
+        Node node1 = new Node(1);
+        Node node3 = new Node(3);
+        list.addInTail(node1);
+        list.addInTail(node3);
+
+        Node node2 = new Node(2);
+        list.insertAfter(node1, node2);
+
+        Assertions.assertSame(list.head, node1);
+        Assertions.assertSame(node1.next, node2);
+        Assertions.assertSame(node2.next, node3);
+        Assertions.assertSame(list.tail, node3);
+    }
+
+    @Test
     public void testInsertAfterSingle() {
         LinkedList list = new LinkedList();
         Node node1 = new Node(1);
