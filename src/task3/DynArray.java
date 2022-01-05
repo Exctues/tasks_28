@@ -49,7 +49,7 @@ public class DynArray<T> {
     }
 
     public void insert(T itm, int index) {
-        if (index < 0 && index > count)
+        if (index < 0 || index > count)
             throw new ArrayIndexOutOfBoundsException();
 
         if (index == count) {
@@ -61,7 +61,7 @@ public class DynArray<T> {
         if (count == capacity) {
             makeArray((int) (expandCoefficient * capacity));
 
-            if (index >= 0) System.arraycopy(oldArray, 0, array, 0, index);
+            System.arraycopy(oldArray, 0, array, 0, index);
         }
 
         // shift elements after index by 1 step to right
@@ -74,10 +74,11 @@ public class DynArray<T> {
     }
 
     public void remove(int index) {
-        if (index < 0 && index >= count)
+        if (index < 0 || index >= count)
             throw new ArrayIndexOutOfBoundsException();
 
-        if (index == count) {
+        if (index == count - 1) {
+            array[count - 1] = null;
             count--;
             return;
         }
@@ -86,7 +87,7 @@ public class DynArray<T> {
         // If after remove we will have with less than 50% of buffer usage then shrink it
         if (count - 1 < Math.ceil(capacity / 2f)) {
             makeArray(Math.max((int) (capacity * shrinkCoefficient), 16));
-            if (index >= 0) System.arraycopy(oldArray, 0, array, 0, index);
+            System.arraycopy(oldArray, 0, array, 0, index);
         }
 
         if (count - 1 - index >= 0) System.arraycopy(oldArray, index + 1, array, index, count - 1 - index);

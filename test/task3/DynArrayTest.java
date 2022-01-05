@@ -188,4 +188,13 @@ public class DynArrayTest {
         Assertions.assertSame(21, a.capacity);
         Assertions.assertSame(15, a.count);
     }
+
+    @Test
+    public void testInsertRemoveIncorrect() {
+        DynArray<Integer> a = new DynArray<>(Integer.class);
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.insert(3, 2));
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.insert(3, -2));
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.remove(2));
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.remove(-2));
+    }
 }
