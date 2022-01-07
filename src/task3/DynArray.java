@@ -77,20 +77,24 @@ public class DynArray<T> {
         if (index < 0 || index >= count)
             throw new ArrayIndexOutOfBoundsException();
 
+        T[] oldArray = array;
         if (index == count - 1) {
-            array[count - 1] = null;
+            array[index] = null;
+            if ((count - 1) * 2 < capacity) {
+                makeArray(Math.max((int) (capacity * shrinkCoefficient), 16));
+                System.arraycopy(oldArray, 0, array, 0, index);
+            }
             count--;
             return;
         }
 
-        T[] oldArray = array;
         // If after remove we will have with less than 50% of buffer usage then shrink it
-        if (count - 1 < Math.ceil(capacity / 2f)) {
+        if ((count - 1) * 2 < capacity) {
             makeArray(Math.max((int) (capacity * shrinkCoefficient), 16));
             System.arraycopy(oldArray, 0, array, 0, index);
         }
 
-        if (count - 1 - index >= 0) System.arraycopy(oldArray, index + 1, array, index, count - 1 - index);
+        System.arraycopy(oldArray, index + 1, array, index, count - 1 - index);
 
         count--;
     }

@@ -107,11 +107,11 @@ public class DynArrayTest {
 
         for (int i = 0; i < 17; i++) {
             if (i < 8) {
-                Assertions.assertSame(i, a.getItem(i));
+                Assertions.assertEquals(i, a.getItem(i));
             } else if (i > 8) {
-                Assertions.assertSame(i - 1, a.getItem(i));
+                Assertions.assertEquals(i - 1, a.getItem(i));
             } else { // i == 8
-                Assertions.assertSame(-10, a.getItem(i));
+                Assertions.assertEquals(-10, a.getItem(i));
             }
 
         }
@@ -133,7 +133,7 @@ public class DynArrayTest {
 
         Assertions.assertSame(16, a.capacity);
         Assertions.assertSame(9, a.count);
-        Assertions.assertSame(6, a.getItem(5));
+        Assertions.assertEquals(6, a.getItem(5));
     }
 
     @Test
@@ -196,5 +196,57 @@ public class DynArrayTest {
         Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.insert(3, -2));
         Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.remove(2));
         Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.remove(-2));
+    }
+
+    @Test
+    public void testShrinkCorrectSize() {
+        DynArray<Integer> a = new DynArray<>(Integer.class);
+        for (int i = 0; i < 1024; i++)
+            a.append(i);
+
+        // from 0 .. 1023,   size = 1024, cap = 1024
+        // to   513 .. 1023, size = 511,  cap = 682
+        {
+            for (int i = 0; i < 512; i++)
+                a.remove(0);
+
+            int oldCap = a.capacity;
+            Assertions.assertEquals(1024, a.capacity);
+            Assertions.assertEquals(512, a.count);
+            a.remove(0);
+            Assertions.assertEquals((int) (oldCap / 1.5f), a.capacity);
+            Assertions.assertEquals(511, a.count);
+        }
+
+    }
+
+    @Test
+    public void testShrinkCorrectSizeFromRight() {
+        DynArray<Integer> a = new DynArray<>(Integer.class);
+        for (int i = 0; i < 1024; i++)
+            a.append(i);
+
+        // from 0 .. 1023,   size = 1024, cap = 1024
+        // to   513 .. 1023, size = 511,  cap = 682
+        {
+            for (int i = 0; i < 512; i++)
+                a.remove(1023-i);
+
+            int oldCap = a.capacity;
+            Assertions.assertEquals(1024, a.capacity);
+            Assertions.assertEquals(512, a.count);
+            a.remove(511);
+            Assertions.assertEquals((int) (oldCap / 1.5f), a.capacity);
+            Assertions.assertEquals(511, a.count);
+        }
+
+    }
+
+    @Test
+    public void testRemoveFromEmpty() {
+        DynArray<Integer> a = new DynArray<>(Integer.class);
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> a.remove(0));
+
+        Assertions.assertEquals(16, a.capacity);
     }
 }
