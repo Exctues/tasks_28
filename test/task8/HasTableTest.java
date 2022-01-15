@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class HasTableTest {
     @Test
-    public void testAddOverLimit(){
+    public void testAddOverLimit() {
         final int size = 19;
         final int step = 3;
-        HashTable a = new HashTable(size,step);
+        HashTable a = new HashTable(size, step);
 
         for (int i = 0; i < size; i++) {
             Assertions.assertNotEquals(-1, a.put("abc"));
@@ -18,10 +18,10 @@ public class HasTableTest {
     }
 
     @Test
-    public void testAddOverLimitDifferent(){
+    public void testAddOverLimitDifferent() {
         final int size = 19;
         final int step = 3;
-        HashTable a = new HashTable(size,step);
+        HashTable a = new HashTable(size, step);
 
         for (int i = 0; i < size; i++) {
             Assertions.assertNotEquals(-1, a.put("abc" + i));
@@ -31,10 +31,10 @@ public class HasTableTest {
     }
 
     @Test
-    public void testFind(){
+    public void testFind() {
         final int size = 19;
         final int step = 3;
-        HashTable a = new HashTable(size,step);
+        HashTable a = new HashTable(size, step);
 
         for (int i = 0; i < size; i++) {
             Assertions.assertNotEquals(-1, a.put("abc" + i));
@@ -42,6 +42,21 @@ public class HasTableTest {
 
         for (int i = 0; i < size; i++) {
             Assertions.assertNotEquals(-1, a.find("abc" + i));
+        }
+    }
+
+    @Test
+    public void testFindNotExisted() {
+        final int size = 19;
+        final int step = 3;
+        HashTable a = new HashTable(size, step);
+
+        for (int i = 0; i < size; i++) {
+            Assertions.assertNotEquals(-1, a.put("abc" + i));
+        }
+
+        for (int i = 0; i < size; i++) {
+            Assertions.assertEquals(-1, a.find("abc" + (100000 + i)));
         }
     }
 }

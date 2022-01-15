@@ -14,7 +14,7 @@ public class HashTable {
     }
 
     public int hashFun(String value) {
-        return value.hashCode() % slots.length;
+        return Math.abs(value.hashCode() % slots.length);
     }
 
     public int seekSlot(String value) {
