@@ -41,7 +41,7 @@ public class HashTable {
         int h1 = hashFun(value);
         for (int i = 0; i <= size; i++) {
             int idx = (h1  + step * i) % size;
-            if (slots[idx].equals(value))
+            if (slots[idx] != null && slots[idx].equals(value))
                 return idx;
         }
         return -1;
