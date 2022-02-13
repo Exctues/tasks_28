@@ -108,7 +108,7 @@ class BST<T> {
                     nodeToRemove.Parent.RightChild = null;
             }
 
-            if(nodeToRemove == Root)
+            if (nodeToRemove == Root)
                 Root = null;
             return true;
         }
@@ -189,63 +189,4 @@ class BST<T> {
     public int Count() {
         return Count(Root);
     }
-
-//    public boolean DeleteNodeByKey(int key) {
-//        BSTFind<T> res = FindNodeByKey(key);
-//        if (!res.NodeHasKey)
-//            return false;
-//
-//        BSTNode<T> nodeReplacer = FinMinMax(res.Node.RightChild, false);
-//        if (nodeReplacer == null) {
-//            assert res.Node.RightChild == null;
-//
-//            if (res.Node.Parent != null) {
-//                // non-root case
-//                boolean nodeToDeleteRighterThanParent = res.Node.Parent.NodeKey < key;
-//                if (nodeToDeleteRighterThanParent)
-//                    res.Node.Parent.RightChild = res.Node.LeftChild;
-//                else
-//                    res.Node.Parent.LeftChild = res.Node.LeftChild;
-//                res.Node.LeftChild.Parent = res.Node.Parent;
-//            } else {
-//                Root = res.Node.LeftChild;
-//                if (res.Node.LeftChild != null)
-//                    res.Node.LeftChild.Parent = null;
-//            }
-//
-//            return true;
-//        }
-//
-//        assert nodeReplacer != Root;
-//        assert nodeReplacer.Parent != null;
-//
-//        // make parent point to node-replacer
-//        if (res.Node.Parent != null) {
-//            boolean nodeToDeleteRighterThanParent = res.Node.Parent.NodeKey < key;
-//            if (nodeToDeleteRighterThanParent)
-//                res.Node.Parent.RightChild = nodeReplacer;
-//            else
-//                res.Node.Parent.LeftChild = nodeReplacer;
-//        } else {
-//            // root case
-//            Root = nodeReplacer;
-//        }
-//
-//        // correct children of nodeReplace
-//        BSTNode<T> oldRightChild = nodeReplacer.RightChild;
-//        if (oldRightChild != null) {
-//            boolean nodeReplacerLefterThanItsParent = nodeReplacer.Parent.NodeKey > nodeReplacer.NodeKey;
-//            oldRightChild.Parent = nodeReplacer.Parent;
-//            if (nodeReplacerLefterThanItsParent)
-//                oldRightChild.Parent.LeftChild = oldRightChild;
-//            else
-//                oldRightChild.Parent.RightChild = oldRightChild;
-//        }
-//
-//        //correct parent of nodeReplacer
-//        nodeReplacer.Parent = res.Node.Parent;
-//
-//        return true;
-//    }
-
 }
