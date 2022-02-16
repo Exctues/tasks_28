@@ -210,19 +210,40 @@ class BST<T> {
         return res;
     }
 
-    private void deepHelper(BSTNode current, ArrayList<BSTNode> res) {
+    private void deepHelperPre(BSTNode current, ArrayList<BSTNode> res) {
         if (current == null)
             return;
-
         res.add(current);
-        deepHelper(current.LeftChild, res);
-        deepHelper(current.RightChild, res);
+        deepHelperPre(current.LeftChild, res);
+        deepHelperPre(current.RightChild, res);
     }
 
-    public ArrayList<BSTNode> DeepAllNodes() {
+    private void deepHelperIn(BSTNode current, ArrayList<BSTNode> res) {
+        if (current == null)
+            return;
+        deepHelperIn(current.LeftChild, res);
+        res.add(current);
+        deepHelperIn(current.RightChild, res);
+    }
+
+    private void deepHelperPost(BSTNode current, ArrayList<BSTNode> res) {
+        if (current == null)
+            return;
+        deepHelperPost(current.LeftChild, res);
+        deepHelperPost(current.RightChild, res);
+        res.add(current);
+    }
+
+
+    public ArrayList<BSTNode> DeepAllNodes(int method) {
         ArrayList<BSTNode> res = new ArrayList<>();
 
-        deepHelper(Root, res);
+        if (method == 0)
+            deepHelperIn(Root, res);
+        else if (method == 1)
+            deepHelperPost(Root, res);
+        else
+            deepHelperPre(Root, res);
 
         return res;
     }

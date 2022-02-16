@@ -251,9 +251,9 @@ public class BSTNodeTest {
     }
 
     @Test
-    public void testDeepAllNodes() {
+    public void testDeepAllNodesPre() {
         BST<Integer> bst = makeSample3();
-        ArrayList<BSTNode> res = bst.DeepAllNodes();
+        ArrayList<BSTNode> res = bst.DeepAllNodes(2);
 
         Assertions.assertEquals(100, res.get(0).NodeKey);
         Assertions.assertEquals(70, res.get(1).NodeKey);
@@ -265,5 +265,39 @@ public class BSTNodeTest {
         Assertions.assertEquals(225, res.get(7).NodeKey);
         Assertions.assertEquals(400, res.get(8).NodeKey);
         Assertions.assertEquals(500, res.get(9).NodeKey);
+    }
+
+    @Test
+    public void testDeepAllNodesIn() {
+        BST<Integer> bst = makeSample3();
+        ArrayList<BSTNode> res = bst.DeepAllNodes(0);
+
+        Assertions.assertEquals(60, res.get(0).NodeKey);
+        Assertions.assertEquals(70, res.get(1).NodeKey);
+        Assertions.assertEquals(80, res.get(2).NodeKey);
+        Assertions.assertEquals(100, res.get(3).NodeKey);
+        Assertions.assertEquals(200, res.get(4).NodeKey);
+        Assertions.assertEquals(225, res.get(5).NodeKey);
+        Assertions.assertEquals(250, res.get(6).NodeKey);
+        Assertions.assertEquals(300, res.get(7).NodeKey);
+        Assertions.assertEquals(400, res.get(8).NodeKey);
+        Assertions.assertEquals(500, res.get(9).NodeKey);
+    }
+
+    @Test
+    public void testDeepAllNodesPost() {
+        BST<Integer> bst = makeSample3();
+        ArrayList<BSTNode> res = bst.DeepAllNodes(1);
+
+        Assertions.assertEquals(60, res.get(0).NodeKey);
+        Assertions.assertEquals(80, res.get(1).NodeKey);
+        Assertions.assertEquals(70, res.get(2).NodeKey);
+        Assertions.assertEquals(225, res.get(3).NodeKey);
+        Assertions.assertEquals(250, res.get(4).NodeKey);
+        Assertions.assertEquals(500, res.get(5).NodeKey);
+        Assertions.assertEquals(400, res.get(6).NodeKey);
+        Assertions.assertEquals(300, res.get(7).NodeKey);
+        Assertions.assertEquals(200, res.get(8).NodeKey);
+        Assertions.assertEquals(100, res.get(9).NodeKey);
     }
 }
