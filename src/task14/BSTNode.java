@@ -189,4 +189,41 @@ class BST<T> {
     public int Count() {
         return Count(Root);
     }
+
+    public ArrayList<BSTNode> WideAllNodes() {
+        if (Root == null)
+            return new ArrayList<>();
+
+        ArrayList<BSTNode> res = new ArrayList<>();
+
+        Queue<BSTNode> q = new ArrayDeque<>();
+        q.add(Root);
+        while (!q.isEmpty()) {
+            BSTNode node = q.poll();
+            res.add(node);
+            if (node.LeftChild != null)
+                q.offer(node.LeftChild);
+            if (node.RightChild != null)
+                q.offer(node.RightChild);
+        }
+
+        return res;
+    }
+
+    private void deepHelper(BSTNode current, ArrayList<BSTNode> res) {
+        if (current == null)
+            return;
+
+        res.add(current);
+        deepHelper(current.LeftChild, res);
+        deepHelper(current.RightChild, res);
+    }
+
+    public ArrayList<BSTNode> DeepAllNodes() {
+        ArrayList<BSTNode> res = new ArrayList<>();
+
+        deepHelper(Root, res);
+
+        return res;
+    }
 }
