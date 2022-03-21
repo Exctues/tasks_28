@@ -18,10 +18,7 @@ public class HeapTest {
         Arrays.sort(a);
         for (int i = 0; i < a.length; i++) {
             int res = h.GetMax();
-            System.out.println(a[a.length - i - 1] + " " + res);
             Assertions.assertEquals(a[a.length - i - 1], res);
-            System.out.println(Arrays.toString(h.HeapArray));
         }
     }
-
 }

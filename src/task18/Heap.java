@@ -13,13 +13,11 @@ class Heap {
     }
 
     public void MakeHeap(int[] a, int depth) {
-//        this.depth = depth;
         int maxLen = (int) Math.pow(2, depth + 1) - 1;
         HeapArray = new int[maxLen];
         Arrays.fill(HeapArray, -1);
         for (int x : a) {
             Add(x);
-            System.out.println(Arrays.toString(HeapArray));
         }
     }
 
