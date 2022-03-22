@@ -66,11 +66,13 @@ class Heap {
         HeapArray[curSize] = key;
         int currentPos = curSize;
         while (currentPos > 0) {
-            int parentPos = (curSize - 1) / 2;
+            int parentPos = (currentPos - 1) / 2;
+            System.out.println(currentPos + " | " + parentPos);
             if (HeapArray[parentPos] > HeapArray[currentPos])
                 break;
             swap(HeapArray, parentPos, currentPos);
             currentPos = parentPos;
+
         }
 
         ++curSize;

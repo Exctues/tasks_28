@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class HeapTest {
     @Test
-    public void makeHeapTest() {
+    public void addTest() {
         //       7
         //    5      6
         //  1   2  3   4
@@ -20,5 +20,25 @@ public class HeapTest {
             int res = h.GetMax();
             Assertions.assertEquals(a[a.length - i - 1], res);
         }
+    }
+
+    @Test
+    public void makeHeapTest2() {
+        int[] a = {};
+        Heap h = new Heap();
+        h.MakeHeap(a, 2);
+
+        Assertions.assertTrue(h.Add(5));
+        System.out.println(Arrays.toString(h.HeapArray));
+        Assertions.assertTrue(h.Add(10));
+        System.out.println(Arrays.toString(h.HeapArray));
+        Assertions.assertTrue(h.Add(6));
+        System.out.println(Arrays.toString(h.HeapArray));
+        Assertions.assertTrue(h.Add(7));
+        System.out.println(Arrays.toString(h.HeapArray));
+        Assertions.assertTrue(h.Add(10));
+        System.out.println(Arrays.toString(h.HeapArray));
+        Assertions.assertTrue(h.Add(6));
+        System.out.println(Arrays.toString(h.HeapArray));
     }
 }
