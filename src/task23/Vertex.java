@@ -83,10 +83,15 @@ class SimpleGraph {
     }
 
     boolean IsConnectionBetweenAnyVertices(ArrayList<Integer> vertices) {
-        for (int i = 0; i < vertices.size(); i++)
-            for (int j = i + 1; j < vertices.size(); j++)
-                if (IsEdge(i, j))
+        for (int i = 0; i < vertices.size(); i++) {
+            for (int j = i + 1; j < vertices.size(); j++) {
+                int v1 = vertices.get(i);
+                int v2 = vertices.get(j);
+                if (IsEdge(v1, v2)) {
                     return true;
+                }
+            }
+        }
         return false;
     }
 
